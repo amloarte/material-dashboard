@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../services/login/login.service';
 import { Router } from '@angular/router';
+import { Usuario } from '../../models/usuario';
 
 @Component({
   selector: 'app-header',
@@ -8,14 +9,16 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( private loginService: LoginService,
-               private router: Router) { }
+  usuario: Usuario;
 
-  ngOnInit(): void {
+  constructor(  private _usuarioService: LoginService) { 
+    this.usuario = this._usuarioService.usuario;
   }
 
+  ngOnInit(): void {}
+  
   logOut(){
-    //this.loginService.logOut();
+    this._usuarioService.logOut(this.usuario.id_usuario);
   }
 
 }

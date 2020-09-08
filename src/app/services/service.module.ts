@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService,
          SidebarService,
+         LoginGuard
         } from './service.index';
 
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     HttpClientModule
@@ -15,6 +15,8 @@ import { LoginService,
   providers:[
     LoginService,
     SidebarService,
-  ]
+    LoginGuard
+  ],
+  declarations: [],
 })
 export class ServiceModule { }

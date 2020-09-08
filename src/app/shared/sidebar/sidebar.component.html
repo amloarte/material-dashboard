@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="pruple" data-background-color="white">
+<div class="sidebar" data-color="pruple" data-background-color="white" data-image="../../../assets/img/sidebar-1.jpg">
     <!--
     Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -9,10 +9,10 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li *ngFor="let funcionalidad of funcionalidades" class="nav-item">
-                <a class="nav-link" [routerLink]="['/interno']" routerLinkActive="router-link-active">
+            <li class="nav-item" *ngFor="let item of funcionalidad_padre" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="[item.url]">
                     <i class="material-icons">library_books</i>
-                    <p>{{ funcionalidad.nombre }}</p>
+                    <p>{{ item.nombre }}</p>
                 </a>
             </li>
             <!-- <li class="nav-item ">

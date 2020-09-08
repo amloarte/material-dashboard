@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
-import { HeaderComponent } from './header/header.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { CommonModule } from '@angular/common';
+
+//Rutas
 import { RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
+
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -11,7 +14,7 @@ import { BrowserModule } from '@angular/platform-browser';
   ],
   imports: [
     RouterModule,
-    BrowserModule,
+    CommonModule,
   ],
   exports: [
     HeaderComponent,

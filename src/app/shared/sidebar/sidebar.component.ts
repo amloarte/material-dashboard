@@ -1,37 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { SidebarService } from '../../services/shared/sidebar.service';
-import { Menu } from '../../models/menu.model';
-import { ID_SISTEMA } from '../../config/config';
-import { IFuncionalidades } from '../../interfaces/funcionalidades';
+import { SidebarService } from '../../services/service.index';
+import { Funcionalidades } from '../../models/funcionalidades';
+import { LoginService } from '../../services/service.index';
+import { Usuario } from '../../models/usuario';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
 })
+
 export class SidebarComponent implements OnInit {
 
-  funcionalidades: IFuncionalidades[] = [];
+  usuario: Usuario;
+  funcionalidad_padre: Funcionalidades [] = [];
 
-  menu: Menu ={
-    id_perfil: 1,
-    id_sistema: ID_SISTEMA,
-    tipo: 450
+  constructor( 
+    private sidebarService: SidebarService,
+    private _usuarioService: LoginService,
+  ) { 
+    this.getFuncionalidadesPadre();
+    this.usuario = this._usuarioService.usuario;
   }
   
-  constructor( private sidebarService: SidebarService) { 
-    this.sidebarService.getFuncionalidades(this.menu)
+  getFuncionalidadesPadre(){
+    this.sidebarService.get_funcionalidades_padre(this.usuario.id_perfil)
       .subscribe((resp: any) => {
-        this.funcionalidades = resp
-        console.log(resp);
-      })
+        this.funcionalidad_padre = resp
+      });
   }
   
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    //this.getFuncionalidades();
-  }
-  
-  getFuncionalidades(){
-   
-  }
 }

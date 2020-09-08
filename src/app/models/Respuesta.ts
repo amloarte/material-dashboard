@@ -1,9 +1,8 @@
-import { Usuario } from './usuario.model'
 
-export class RespuestaLogin {
+export class Respuesta {
     
     constructor(
-        public T: Usuario, 
+        public T: object, 
         public codigo: string, 
         public mensajes: object) {
     }
