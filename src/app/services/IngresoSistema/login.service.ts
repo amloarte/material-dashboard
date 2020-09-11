@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { URL_SERVICIOS, BASICAUTH, ID_SISTEMA } from '../../config/config';
+import { URL_SERVICIOS, ID_SISTEMA } from '../../config/config';
 import { Login } from '../../models/login';
 import { Router } from '@angular/router';
 import { Usuario } from '../../models/usuario';
@@ -18,10 +18,10 @@ export class LoginService {
     private route: Router)
   {
     this.cargarStorange();
-    this.validarHorario();
   }
 
   guardarStorange( usuario: Usuario){
+    localStorage.clear();
     localStorage.setItem('usuario', JSON.stringify(usuario));
     this.usuario = usuario;
   }
@@ -39,6 +39,7 @@ export class LoginService {
           this.guardarStorange(resp.T);
           resolve(resp);
         }else{
+          resolve(resp);
           localStorage.clear();
         }
       }, reject)
@@ -61,10 +62,10 @@ export class LoginService {
     let url = URL_SERVICIOS + '/api/login/verificar_horario';
 
     let params = new HttpParams();
-    params = params.append('id_usuario', this.usuario.id_usuario.toString());
-    params = params.append('id_sistema', ID_SISTEMA.toString());
-    params = params.append('id_perfil', this.usuario.id_perfil.toString());
-    console.log(params);
+        params = params.set('id_usuario', this.usuario.id_usuario.toString());
+        params = params.set('id_sistema', ID_SISTEMA.toString());
+        params = params.set('id_perfil', this.usuario.id_perfil.toString());
+
     return this.http.get(url, { params }).subscribe(resp => {
       console.log(resp);
     })

@@ -18,17 +18,21 @@ export class SidebarComponent implements OnInit {
     private sidebarService: SidebarService,
     private _usuarioService: LoginService,
   ) { 
-    this.getFuncionalidadesPadre();
     this.usuario = this._usuarioService.usuario;
   }
   
-  getFuncionalidadesPadre(){
-    this.sidebarService.get_funcionalidades_padre(this.usuario.id_perfil)
-      .subscribe((resp: any) => {
-        this.funcionalidad_padre = resp
-      });
-  }
-  
   ngOnInit(): void {}
+
+  getFuncionalidadesPadre() {
+
+    if (this.usuario.id_perfil != 0) {
+      this.sidebarService.get_funcionalidades_padre(this.usuario.id_perfil)
+        .subscribe((resp: any) => {
+          this.funcionalidad_padre = resp
+        });
+    }else{
+      this.sidebarService.cargarStorange();
+    }
+  }
 
 }

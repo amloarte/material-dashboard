@@ -4,7 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 export const URL_SERVICIOS = 'http://localhost:6350';
 
 //SISTEMA
-export const ID_SISTEMA = 82;
+export const ID_SISTEMA = 4;
 
 // TERMINAL 
 export const TERMINAL = '192.168.41.11';

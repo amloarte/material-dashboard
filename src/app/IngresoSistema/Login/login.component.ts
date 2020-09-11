@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { LoginService } from '../services/login/login.service';
 import { Router } from '@angular/router';
 import { Md5 } from 'ts-md5/dist/md5';
-import { Login } from '../models/login';
-import { Respuesta } from '../models/Respuesta';
-import { ID_SISTEMA, TERMINAL } from '../config/config';
-import { Usuario } from '../models/usuario';
+import { Usuario } from '../../models/usuario';
+import { Respuesta } from '../../models/Respuesta';
+import { ID_SISTEMA, TERMINAL } from '../../config/config';
+import { Login } from '../../models/login';
+import { LoginService } from '../../services/service.index';
 
 const md5 = new Md5();
 
@@ -17,7 +17,6 @@ const md5 = new Md5();
 
 export class LoginComponent implements OnInit {
 
-  
   usuario: Usuario;
   respuesta: Respuesta;
   password: string;
@@ -32,11 +31,10 @@ export class LoginComponent implements OnInit {
   constructor(private loginService: LoginService,
               private router: Router){ }
 
-  ngOnInit(): void {
-    this.loginService.validarHorario();
-  }
+  ngOnInit(): void {}
 
   async login(fLogin: NgForm){
+
     if (fLogin.invalid){ return; }
     this.loginService.login(this.loginUser)
       .then( (resp: any) =>{
@@ -46,6 +44,7 @@ export class LoginComponent implements OnInit {
           alert("Actualmente no puede ingresar al sistema. Intente mas tarde")
           console.log(err);
       });
+
   }
 
   validarLogin(codigo: string){
@@ -73,7 +72,7 @@ export class LoginComponent implements OnInit {
         const splitLogLogin = mensajeLogin.split('|');
         const logLogin = splitLogLogin[0] + '\n\n' + splitLogLogin[1] + '\n' + splitLogLogin[2] + '\n' + splitLogLogin[3];
         alert(logLogin)
-        this.router.navigate(['/index'])
+        this.router.navigate(['/perfiles'])
         break;
       }
       case 'L5': {

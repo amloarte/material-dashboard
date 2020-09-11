@@ -1,17 +1,22 @@
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { RecuperarPasswordComponent } from './login/recuperar-password.component';
 import { PagesComponent } from './pages/pages.component';
+import { LoginComponent } from './IngresoSistema/Login/login.component';
+import { RecuperarPasswordComponent } from './IngresoSistema/RecuperarPassword/recuperar-password.component';
+import { PerfilesComponent } from './IngresoSistema/Perfiles/perfiles.component';
+import { LoginGuard } from './services/guards/login-guard.guard';
 
 const appRoutes: Routes = [
-    { path: 'login', component: LoginComponent },
+    { path: '', component: LoginComponent },
     {
-        path: '',
+        path: 'index',
         component: PagesComponent,
         loadChildren: './pages/pages.module#PagesModule'
     },
-    { path: 'recuperarpassword', component: RecuperarPasswordComponent },
-    { path: '**', component: LoginComponent }
+    { path: '**', component: LoginComponent },
+    { path: 'login', component: LoginComponent },
+    { path: 'recuperar-password', component: RecuperarPasswordComponent },
+    { path: 'perfiles', component: PerfilesComponent },
+    { path: 'index', component: PagesComponent },
 ];
 
 export const APP_ROUTES = RouterModule.forRoot(appRoutes, { useHash: true });
